@@ -9,7 +9,7 @@ async def pkg_interface_add(event):
     if package_supported is True:
         packages = db.get("packages")
         packages.append(url)
-        db.add("packages", packages)
+        db.add("packages", list(set(packages)))
         await event.edit("`Installed package successfully.`")
     else:
         await event.edit(f"The following error occured while installing the package:\n{package_supported}")
