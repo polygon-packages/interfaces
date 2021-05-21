@@ -19,3 +19,11 @@ async def pkg_interface_remove(event):
         await event.edit(f"Removed package `{name}` successfully.")
     else:
         await event.edit(f"Package `{name}` not found.")
+
+@polygon.on(pattern="pkgs")
+async def pkg_interface_list(event):
+    # Very basic telegram interface to list packages
+    if not polygon.packages:
+        return await event.edit("`No packages have been loaded yet.`")
+    packages = "**All loaded packages:**\n\n" + "\n".join([f"~` {name}`" for name in polygon.packages])
+    await event.edit(packages)
